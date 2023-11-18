@@ -1,40 +1,37 @@
-enum Title {
-    GeneralContractor,
-    SubContractor,
-    Owner
+struct Neighbor {
+    name: &'static str,
+    borrowing: &'static str
 }
 
-struct ConstructionWorker {
-    title: Title,
-    wage: i64
+fn dans_house (neighbor: &Neighbor) {
+    let name = neighbor.name;
+    let borrowing = neighbor.borrowing;
+
+    println!("{name} is at Dan's house and wants to borrow {borrowing}");
 }
 
-fn get_construction_worker(construction_worker: ConstructionWorker) {
-    let pre_text = "The construction worker's title is:";
-    match construction_worker.title {
-        Title::GeneralContractor => println!("{pre_text} General Contractor"),
-        Title::SubContractor => println!("{pre_text} Sub-Contractor"),
-        Title::Owner => println!("{pre_text} Owner")
-    }
-    println!("They make ${:?}\n", construction_worker.wage);
+fn evelyns_house (neighbor: &Neighbor) {
+    let name = neighbor.name;
+    let borrowing = neighbor.borrowing;
+
+    println!("{name} is at Evelyn's house and wants to borrow {borrowing}");
+}
+
+fn rons_house (neighbor: &Neighbor) {
+    let name = neighbor.name;
+    let borrowing = neighbor.borrowing;
+
+    println!("{name} is at Ron's house and wants to borrow {borrowing}");
 }
 
 fn main() {
-    let gc = ConstructionWorker {
-        title: Title::GeneralContractor,
-        wage: 180000
+    let dave = Neighbor {
+        name: "Dave",
+        borrowing: "sugar"
     };
-    get_construction_worker(gc);
 
-    let sc = ConstructionWorker {
-        title: Title::SubContractor,
-        wage: 150000
-    };
-    get_construction_worker(sc);
+    dans_house(&dave);
+    evelyns_house(&dave);
+    rons_house(&dave);
 
-    let owner = ConstructionWorker {
-        title: Title::Owner,
-        wage: 120000
-    };
-    get_construction_worker(owner);
 }
