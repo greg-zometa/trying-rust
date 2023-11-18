@@ -1,24 +1,40 @@
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right
+enum Title {
+    GeneralContractor,
+    SubContractor,
+    Owner
 }
 
-fn which_way(go: Direction) -> &'static str {
-    match go {
-        Direction::Up => "⬆️",
-        Direction::Down => "⬇️",
-        Direction::Left => "⬅️",
-        Direction::Right => "➡️"
+struct ConstructionWorker {
+    title: Title,
+    wage: i64
+}
+
+fn get_construction_worker(construction_worker: ConstructionWorker) {
+    let pre_text = "The construction worker's title is:";
+    match construction_worker.title {
+        Title::GeneralContractor => println!("{pre_text} General Contractor"),
+        Title::SubContractor => println!("{pre_text} Sub-Contractor"),
+        Title::Owner => println!("{pre_text} Owner")
     }
+    println!("They make ${:?}\n", construction_worker.wage);
 }
 
 fn main() {
-    let go_up = which_way(Direction::Up);
-    let go_left = which_way(Direction::Left);
-    let go_down = which_way(Direction::Down);
-    let go_right = which_way(Direction::Right);
+    let gc = ConstructionWorker {
+        title: Title::GeneralContractor,
+        wage: 180000
+    };
+    get_construction_worker(gc);
 
-    println!("{go_up} {go_up} {go_down} {go_down} {go_left} {go_right} {go_left} {go_right} 🅱️ 🅰️");
+    let sc = ConstructionWorker {
+        title: Title::SubContractor,
+        wage: 150000
+    };
+    get_construction_worker(sc);
+
+    let owner = ConstructionWorker {
+        title: Title::Owner,
+        wage: 120000
+    };
+    get_construction_worker(owner);
 }
