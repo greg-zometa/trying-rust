@@ -1,37 +1,54 @@
-struct Neighbor {
-    name: &'static str,
-    borrowing: &'static str
+struct Box {
+    dimensions: Dimensions,
+    weight: f64,
+    color: Color
 }
 
-fn dans_house (neighbor: &Neighbor) {
-    let name = neighbor.name;
-    let borrowing = neighbor.borrowing;
-
-    println!("{name} is at Dan's house and wants to borrow {borrowing}");
+enum Color {
+    Red,
+    Blue,
+    Green
 }
 
-fn evelyns_house (neighbor: &Neighbor) {
-    let name = neighbor.name;
-    let borrowing = neighbor.borrowing;
-
-    println!("{name} is at Evelyn's house and wants to borrow {borrowing}");
+struct  Dimensions {
+    width: f64,
+    height: f64,
+    depth: f64
 }
 
-fn rons_house (neighbor: &Neighbor) {
-    let name = neighbor.name;
-    let borrowing = neighbor.borrowing;
+impl Box {
+    fn new(weight: f64, color: Color, dimensions: Dimensions) -> Self {
+        Self { dimensions, weight, color }
+    }
+    fn print(&self) {
+        self.color.print();
+        self.dimensions.print();
+        println!("weight: {:?}", self.weight);
+    }
+}
 
-    println!("{name} is at Ron's house and wants to borrow {borrowing}");
+impl Color {
+    fn print(&self) {
+        match self {
+            Color::Red => println!("red"),
+            Color::Blue => println!("blue"),
+            Color::Green => println!("green")
+        }
+    }
+}
+
+impl Dimensions {
+    fn print(&self) {
+        println!("Width: {:?}", self.width);
+        println!("Height: {:?}", self.height);
+        println!("Depth: {:?}", self.depth);
+    }
 }
 
 fn main() {
-    let dave = Neighbor {
-        name: "Dave",
-        borrowing: "sugar"
+    let small_dims = Dimensions {
+        width: 10.0, height: 20.0, depth: 30.0
     };
-
-    dans_house(&dave);
-    evelyns_house(&dave);
-    rons_house(&dave);
-
+    let small_box = Box::new(40.0, Color::Red, small_dims);
+    small_box.print();
 }
